@@ -79,4 +79,7 @@ Match any string of characters (%), as long as it ends with the letter 'r'.
 */
 select * from Worker where (first_name like '%r') and datalength(first_name) >=3;
 
+/*2. find the average salary of employees for each department that has at least
+4 people as worker*/
 
+select department, avg(salary) as avg_salary from Worker group by department having count(*) <= 4;
