@@ -79,7 +79,14 @@ Match any string of characters (%), as long as it ends with the letter 'r'.
 */
 select * from Worker where (first_name like '%r') and datalength(first_name) >=3;
 
+
 /*2. find the average salary of employees for each department that has at least
 4 people as worker*/
 
-select department, avg(salary) as avg_salary from Worker group by department having count(*) <= 4;
+select department, avg(salary) as avg_salary from Worker group by department
+having count(*) <= 4;
+
+
+/*3. List all the employee expect 'Manager' & 'Asst. Manager'*/
+select * from Worker inner join Title on Worker.worker_id = Title.worker_id 
+where (worker_title) not in('Manager', 'Asst. Manager')
