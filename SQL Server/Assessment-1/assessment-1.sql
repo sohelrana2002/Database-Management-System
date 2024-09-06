@@ -71,17 +71,17 @@ select * from Title
 /*problem solving from here*/
 
 /*1. write an SQL query to print details of the workers whose first_name 
-ends with 'r' and contains at least 3 alphabets without and operator
+	ends with 'r' and contains at least 3 alphabets without and operator
 
 explanation:
-Therefore, LIKE '%r' means:
-Match any string of characters (%), as long as it ends with the letter 'r'.
+	Therefore, LIKE '%r' means:
+	Match any string of characters (%), as long as it ends with the letter 'r'.
 */
 select * from Worker where (first_name like '%r') and datalength(first_name) >=3;
 
 
 /*2. find the average salary of employees for each department that has at least
-4 people as worker*/
+	4 people as worker*/
 
 select department, avg(salary) as avg_salary from Worker group by department
 having count(*) <= 4;
@@ -91,21 +91,17 @@ having count(*) <= 4;
 select * from Worker inner join Title on Worker.worker_id = Title.worker_id 
 where (worker_title) not in('Manager', 'Asst. Manager');
 
+
 /*4(extra). write an SQL query to fetch the first 50% records from a table using
-percent keyword*/
+	percent keyword*/
 select top 50 percent * from Worker;
 
 
 /*4. write an SQL query to fetch the first 50% records from a table without using
-percent keyword*/
-select * from Worker limit(select FLOOR(count(*)/2) from Worker);
-select top (count(worker_id)/2) * from Worker ;
+	percent keyword*/
+select top (select floor(count(*)/2) from Worker) * from Worker;
 
 
-WITH CTE AS (
-  SELECT *, ROW_NUMBER() OVER (ORDER BY worker_id) AS row_num
-  FROM Worker
-)
-SELECT worker_id, first_name, last_name, salary, joining_date, department
-FROM CTE
-WHERE row_num <= (SELECT COUNT(*)/2 FROM Worker);
+/*how to count total rows in a table*/
+select count(*) as totle_count from Worker
+
