@@ -89,4 +89,23 @@ having count(*) <= 4;
 
 /*3. List all the employee expect 'Manager' & 'Asst. Manager'*/
 select * from Worker inner join Title on Worker.worker_id = Title.worker_id 
-where (worker_title) not in('Manager', 'Asst. Manager')
+where (worker_title) not in('Manager', 'Asst. Manager');
+
+/*4(extra). write an SQL query to fetch the first 50% records from a table using
+percent keyword*/
+select top 50 percent * from Worker;
+
+
+/*4. write an SQL query to fetch the first 50% records from a table without using
+percent keyword*/
+select * from Worker limit(select FLOOR(count(*)/2) from Worker);
+select top (count(worker_id)/2) * from Worker ;
+
+
+WITH CTE AS (
+  SELECT *, ROW_NUMBER() OVER (ORDER BY worker_id) AS row_num
+  FROM Worker
+)
+SELECT worker_id, first_name, last_name, salary, joining_date, department
+FROM CTE
+WHERE row_num <= (SELECT COUNT(*)/2 FROM Worker);
