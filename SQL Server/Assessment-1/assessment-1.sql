@@ -103,5 +103,25 @@ select top (select floor(count(*)/2) from Worker) * from Worker;
 
 
 /*how to count total rows in a table*/
-select count(*) as totle_count from Worker
+select count(*) as totle_count from Worker;
+
+
+/*5. write an SQL query to print details of the workers who are also Managers*/
+
+
+
+/*6. write an SQL query to print the name of employees having the highest salary in
+each department*/
+select first_name, last_name from Worker 
+select department, max(salary) as max_salary from Worker group by department
+
+SELECT w.first_name, w.last_name, w.department, w.salary
+FROM Worker w
+JOIN (
+  SELECT department, MAX(salary) AS max_salary
+  FROM Worker
+  GROUP BY department
+) AS dept_max
+ON w.department = dept_max.department AND w.salary = dept_max.max_salary;
+
 
