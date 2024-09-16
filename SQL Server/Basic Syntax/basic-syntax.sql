@@ -83,9 +83,19 @@ like if you want to return all customers from Spain that starts with the letter 
 select * from CustomersInfo where PostalCode > 7000 and CustomerName like 'A%'
 
 
+/*----------------
+The WHERE clause can contain one or more OR operators.
 
+The OR operator is used to filter records based on more than one condition, 
+like if you want to return all customers from Germany but also those from France:
+-----------------*/
+select * from CustomersInfo where Country = 'Germany' or Country = 'France';
 
-
+/*-----------
+Select all Germany customers that starts with either "A" or "B":
+-----------*/
+select * from CustomersInfo where Country = 'Germany' and 
+(CustomerName like 'A%' or CustomerName like 'B%');
 
 
 
@@ -95,4 +105,5 @@ select * from CustomersInfo where PostalCode between 13000 and 68000;
 
 SELECT * FROM CustomersInfo
 WHERE CustomerName LIKE 'a%';
+
 

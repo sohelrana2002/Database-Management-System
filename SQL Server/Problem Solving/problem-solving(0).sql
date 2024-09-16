@@ -47,11 +47,22 @@ truncate table employee;
 
 insert into employee(worker_id, first_name,last_name, salary, dept_name, joining_date)
 values
-(1, 'SOHEL', 'RANA', 20000, 'CSE', '20 SEPT 2024'),
-(2, 'FAHIM', 'RAHMAN', 20000, 'CSE', '20 SEPT 2024'),
-(3, 'SABIT', 'RAIHAN', 30000, 'CSE', '10 OCT 2023'),
-(4, 'TAHSIN', 'SIDDIK', 424443, 'CSE', '2 OCT 2023'),
-(5, 'AKIB', 'AHMED', 32221, 'EEE', '3 JAN 1993'),
-(6, 'SOMRAT', 'BOY', 73554, 'BSC', '6 JUN 1971'),
-(7, 'SHOWRAB', 'KHORMOKAR', 73554, 'DRUG D', '21 JAN 100'),
-(8, 'BIJOY' ,'MOHOITRO', 73534, 'M K' , '23 JAN 1932')
+(1, 'Rana', 'Hamid', 100000, 'HR', '2014-02-20 09:00:00'),
+(2, 'Sanjoy', 'Saha', 80000, 'Admin', '2014-06-11 09:00:00'),
+(3, 'Mahmudul', 'Hasan', 300000, 'HR', '2014-02-20 09:00:00'),
+(4, 'Asad', 'Zaman', 500000, 'Admin', '2014-02-20 09:00:00'),
+(5, 'Sajib', 'Mia', 500000, 'Admin', '2014-06-11 09:00:00'),
+(6, 'Alamgir', 'Kabir', 200000, 'Account', '2014-06-11 09:00:00'),
+(7, 'Foridul', 'Islam', 75000, 'Account', '2014-01-20 09:00:00'),
+(8, 'Keshob' ,'Ray', 90000, 'Admin' , '2014-04-11 09:00:00');
+
+
+/*-----Display all the information of 1st 5 employees of EMPLOYEE table with
+FIRST_NAME+LASTNAME as FULL_NAME.
+----------*/
+SELECT TOP 5 worker_id, first_name + ' ' + last_name AS FullName, salary, dept_name,
+joining_date
+FROM employee;
+
+
+/*-----------Display the complete record of employees working in Admin Department-------------*/SELECT *FROM employeeWHERE dept_name = 'Admin';/*------------Find the name of employees whose salary is greater than 200000---------*/SELECT first_name + ' ' + last_name AS FullNameFROM employeeWHERE salary > 200000;/*----------Update the Salary of Worker by 95000 whose ID is 8 .-------------*/UPDATE employeeSET salary = salary + 95000WHERE worker_id = 8;/*---------Delete the record of employee whose FIRST_NAME is Asad.-----------*/DELETE employeeWHERE first_name = 'Asad';
