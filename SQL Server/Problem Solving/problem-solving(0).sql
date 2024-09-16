@@ -65,4 +65,32 @@ joining_date
 FROM employee;
 
 
-/*-----------Display the complete record of employees working in Admin Department-------------*/SELECT *FROM employeeWHERE dept_name = 'Admin';/*------------Find the name of employees whose salary is greater than 200000---------*/SELECT first_name + ' ' + last_name AS FullNameFROM employeeWHERE salary > 200000;/*----------Update the Salary of Worker by 95000 whose ID is 8 .-------------*/UPDATE employeeSET salary = salary + 95000WHERE worker_id = 8;/*---------Delete the record of employee whose FIRST_NAME is Asad.-----------*/DELETE employeeWHERE first_name = 'Asad';
+/*-----------
+Display the complete record of employees working in Admin Department
+-------------*/
+SELECT *
+FROM employee
+WHERE dept_name = 'Admin';
+
+
+/*------------
+Find the name of employees whose salary is greater than 200000
+---------*/
+SELECT first_name + ' ' + last_name AS FullName
+FROM employee
+WHERE salary > 200000;
+
+
+/*----------
+Update the Salary of Worker by 95000 whose ID is 8 .
+-------------*/
+UPDATE employee
+SET salary = salary + 95000
+WHERE worker_id = 8;
+
+
+/*---------
+Delete the record of employee whose FIRST_NAME is Asad.
+-----------*/
+DELETE employee
+WHERE first_name = 'Asad';
