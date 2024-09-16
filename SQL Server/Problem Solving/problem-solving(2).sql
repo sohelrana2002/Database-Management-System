@@ -120,8 +120,7 @@ WHERE first_name LIKE 'k%';
 
 
 /*----------
-Write an SQL query to print details of the Workers whose FIRST_NAME ends with ‘r’
-and contains seven alphabets.-----------*/SELECT *FROM workerInfoWHERE first_name LIKE '%r';/*-------Write an SQL query to find the position of the alphabet (‘n’) in the FIRST_NAME
+Write an SQL query to print details of the Workers whose FIRST_NAME ends with ‘r’ and contains seven alphabets-----------*/SELECT *FROM workerInfoWHERE first_name LIKE '%r'AND DATALENGTH(first_name) = 7;/*-------Write an SQL query to find the position of the alphabet (‘n’) in the FIRST_NAME
 column ‘Sanjoy’ from Worker table
 ---------*/
 
