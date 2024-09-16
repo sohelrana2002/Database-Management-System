@@ -130,4 +130,51 @@ ORDER BY department DESC
 
 
 /*------
-Write an SQL query to print details of the Workers who are also Managers.-----*/SELECT *FROM WorkerINNER JOIN TitleON Worker.worker_id = Title.worker_idWHERE Title.worker_title IN('Manager');/*-------Write an SQL query to show only odd rows from a table.---------*/SELECT *FROM WorkerWHERE (worker_id % 2 = 1);/*-------Write an SQL query to show only even rows from a table.---------*/SELECT *FROM WorkerWHERE (worker_id % 2 = 0);/*-----Write an SQL query to clone a new table from another table-----*/SELECT *INTO CloneTableFROM Worker;SELECT * FROM CloneTable;/*If you want to clone only the structure (without data), you can do this*/SELECT *INTO CloneTable2FROM WorkerWHERE 1 = 0;/*-------Write an SQL query to show the current date and time.---------*/SELECT GETDATE() AS CurrentDate
+Write an SQL query to print details of the Workers who are also Managers
+-----*/
+SELECT *
+FROM Worker
+INNER JOIN Title
+ON Worker.worker_id = Title.worker_id
+WHERE Title.worker_title IN('Manager');
+
+
+
+/*-------
+Write an SQL query to show only odd rows from a table
+---------*/
+SELECT *
+FROM Worker
+WHERE (worker_id % 2 = 1);
+
+
+
+/*-------
+Write an SQL query to show only even rows from a table
+---------*/
+SELECT *
+FROM Worker
+WHERE (worker_id % 2 = 0);
+
+
+/*-----
+Write an SQL query to clone a new table from another table
+-----*/
+SELECT *
+INTO CloneTable
+FROM Worker;
+
+SELECT * FROM CloneTable;
+
+/*If you want to clone only the structure (without data), you can do this*/
+SELECT *
+INTO CloneTable2
+FROM Worker
+WHERE 1 = 0;
+
+
+
+/*-------
+Write an SQL query to show the current date and time
+---------*/
+SELECT GETDATE() AS CurrentDate
