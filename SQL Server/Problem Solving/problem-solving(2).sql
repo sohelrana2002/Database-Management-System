@@ -122,8 +122,9 @@ WHERE first_name LIKE 'k%';
 /*----------
 Write an SQL query to print details of the Workers whose FIRST_NAME ends with ‘r’
 and contains seven alphabets.-----------*/SELECT *FROM workerInfoWHERE first_name LIKE '%r';/*-------Write an SQL query to find the position of the alphabet (‘n’) in the FIRST_NAME
-column ‘Sanjoy’ from Worker table.
+column ‘Sanjoy’ from Worker table
 ---------*/
+
 SELECT CHARINDEX('n', first_name) AS PositionOfN
 FROM workerInfo
 WHERE first_name = 'Sanjoy'
@@ -140,6 +141,7 @@ GROUP BY dept_name;
 
 /*----------
 List all the employees who have maximum or minimum salary in each department----------*/
+
 SELECT dept_name,
 MAX(salary) AS MaxSalary,
 MIN(salary) AS MinSalary
