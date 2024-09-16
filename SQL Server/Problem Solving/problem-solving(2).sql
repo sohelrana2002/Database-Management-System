@@ -62,8 +62,8 @@ WHERE dept_name = 'Admin';
 
 
 /*--------
-Write an SQL query to update all worker bonus 10% whose joining_date before �2014-
-04-11 09:00:00� otherwise bonus update 5% and also check department name is �Admin�.
+Write an SQL query to update all worker bonus 10% whose joining_date before "2014-
+04-11 09:00:00" otherwise bonus update 5% and also check department name is "Admin".
 ---------*/
 UPDATE workerInfo
 SET salary = salary *
@@ -75,7 +75,7 @@ WHERE dept_name = 'Admin';
 
 
 /*-----------
-Write an SQL query to print details for Workers with the first name �Rana� and �Sajib�
+Write an SQL query to print details for Workers with the first name "Rana" and "Sajib"
 from Worker table.
 ---------*/
 --1ST method
@@ -95,7 +95,7 @@ WHERE first_name IN('Rana', 'Sajib');
 
 
 /*------
-Write an SQL query to print details of workers excluding first names, �Rana� and �Sajib�
+Write an SQL query to print details of workers excluding first names, "Rana" and "Sajib"
 from Worker table.
 ---------*/
 SELECT *
@@ -104,7 +104,7 @@ WHERE first_name NOT IN('Rana', 'Sajib');
 
 
 /*----------
-Write an SQL query to print details of the Workers whose FIRST_NAME contains �a�
+Write an SQL query to print details of the Workers whose FIRST_NAME contains "a"
 -----------*/
 SELECT *
 FROM workerInfo
@@ -119,9 +119,9 @@ FROM workerInfo
 WHERE first_name LIKE 'k%';
 
 
-/*
+/*---------
 Write an SQL query to print details of the Workers whose FIRST_NAME ends with "r" and contains seven alphabets
-*/
+----------*/
 SELECT *
 FROM workerInfo
 WHERE first_name LIKE '%r'
@@ -157,8 +157,8 @@ GROUP BY dept_name;
 
 
 /*---------
-Write an SQL query to find the position of the alphabet (�r�) in the FIRST_NAME
-column �Rana� from Worker table.
+Write an SQL query to find the position of the alphabet ("r") in the FIRST_NAME
+column "Rana" from Worker table.
 ---------*/
 SELECT CHARINDEX('r', first_name) AS PosotionOfR
 FROM workerInfo
@@ -182,8 +182,8 @@ FROM workerInfo;
 
 
 /*---------
-Write an SQL query to print the FIRST_NAME from Worker table after replacing �a�
-with �A�.
+Write an SQL query to print the FIRST_NAME from Worker table after replacing "a"
+with "A".
 ----------*/
 SELECT first_name,
 REPLACE(first_name, 'a', 'A') AS AfterReplacing
