@@ -324,14 +324,16 @@ ORDER BY worker_id DESC;
 Write an SQL query to print the name of employees having the highest salary in each
 department
 ----*/
+WITH temp AS (
+	SELECT department, MAX(salary) AS Max_Salary
+	FROM Worker
+	GROUP BY department
+)
+
 SELECT Worker.first_name + ' ' + Worker.last_name AS Full_Name
 FROM Worker
-INNER JOIN
-(SELECT department, MAX(salary) AS Max_Salary
-FROM Worker
-GROUP BY department) 
-AS temp
-ON Worker.salary= temp.Max_Salary
+INNER JOIN temp
+ON Worker.salary= temp.Max_Salary;
 
 
 
@@ -341,3 +343,35 @@ Write an SQL query to fetch three max salaries from table
 SELECT TOP 3 *
 FROM Worker
 ORDER BY salary DESC
+
+
+
+/*----
+List all the employees who have maximum or minimum salary in each department
+----*/
+SELECT Worker.*
+FROM Worker
+INNER JOIN
+(SELECT department, MAX(salary) AS Max_Salary, MIN(salary) AS Min_Salary
+FROM Worker
+GROUP BY department) AS temp
+ON Worker.department = temp.department 
+AND (Worker.salary= temp.Max_Salary OR Worker.salary = temp.Min_Salary)
+ORDER BY department, salary;
+
+
+
+WITH MaxMinSalaries AS (
+    SELECT department, 
+           MAX(salary) AS MaxSalary, 
+           MIN(salary) AS MinSalary
+    FROM Worker
+    GROUP BY department
+)
+-- Join the original Employees table with the MaxMinSalaries CTE
+SELECT Worker.*
+FROM Worker 
+JOIN MaxMinSalaries 
+    ON Worker.department = MaxMinSalaries.department
+    AND (Worker.salary = MaxMinSalaries.MaxSalary OR Worker.salary = MaxMinSalaries.MinSalary)
+ORDER BY department, salary;
