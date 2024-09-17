@@ -315,7 +315,7 @@ FROM Worker
 
 
 /*-----
-Write an SQL query to fetch the last five records from table.-----*/SELECT TOP 5 *
+Write an SQL query to fetch the last five records from table-----*/SELECT TOP 5 *
 FROM Worker
 ORDER BY worker_id DESC;
 
