@@ -67,7 +67,7 @@ values
 
 select * from Worker;
 select * from Bonus;
-select * from Title
+select * from Title;
 
 
 
@@ -130,7 +130,7 @@ ORDER BY department DESC
 
 
 /*------
-Write an SQL query to print details of the Workers who are also Managers
+Write an SQL query to print details of the Workers who are also Managers.
 -----*/
 SELECT *
 FROM Worker
@@ -141,7 +141,7 @@ WHERE Title.worker_title IN('Manager');
 
 
 /*-------
-Write an SQL query to show only odd rows from a table
+Write an SQL query to show only odd rows from a table.
 ---------*/
 SELECT *
 FROM Worker
@@ -150,7 +150,7 @@ WHERE (worker_id % 2 = 1);
 
 
 /*-------
-Write an SQL query to show only even rows from a table
+Write an SQL query to show only even rows from a table.
 ---------*/
 SELECT *
 FROM Worker
@@ -175,6 +175,169 @@ WHERE 1 = 0;
 
 
 /*-------
-Write an SQL query to show the current date and time
+Write an SQL query to show the current date and time.
 ---------*/
-SELECT GETDATE() AS CurrentDate
+SELECT GETDATE() AS CurrentDate;
+
+
+/*--------
+Write an SQL query to show the top n (say 5) records of a table with Name and
+Designation
+----------*/
+SELECT TOP 5 W.first_name, T.worker_title
+FROM Worker W
+JOIN Title T
+ON W.worker_id = T.worker_id;
+
+
+
+/*------
+Write an SQL query to determine the nth (say n=5) highest salary from a table
+------*/
+SELECT TOP 5 *
+FROM Worker
+ORDER BY salary DESC
+
+
+/*------
+Write an SQL query to fetch the list of employees with the same salary
+-----*/
+---1st method---
+SELECT Worker.*
+FROM Worker
+INNER JOIN (
+	SELECT salary
+	FROM Worker
+	GROUP BY salary
+	HAVING COUNT(*) > 1
+) AS temp
+ON Worker.salary = temp.salary;
+ 
+
+----2nd method---
+SELECT *
+FROM Worker 
+WHERE Salary IN (
+    SELECT Salary
+    FROM Worker
+    GROUP BY Salary
+    HAVING COUNT(*) > 1
+);
+
+
+
+/*-----
+Write an SQL query to show the second highest salary from a table
+-----*/
+----1st method----
+SELECT *
+FROM Worker
+INNER JOIN
+(SELECT TOP 1 *
+FROM (
+	SELECT DISTINCT TOP 2 salary
+	FROM Worker
+	ORDER BY salary DESC
+) AS temp
+ORDER BY salary ASC
+) 
+AS temp2
+ON Worker.salary = temp2.salary;
+
+
+---2nd method----
+SELECT DISTINCT Salary
+FROM Worker
+ORDER BY Salary DESC
+OFFSET 1 ROWS FETCH NEXT 1 ROWS ONLY;
+
+
+/*
+OFFSET 1 ROWS --skips the first (highest) salary.
+FETCH NEXT 1 ROWS ONLY --retrieves the next salary, which is the second highest.
+DISTINCT --is used to avoid duplicate salary values
+*/
+
+
+
+/*----
+Write an SQL query to fetch the first 50% records from a table
+-----*/
+SELECT TOP 50 PERCENT *
+FROM Worker;
+
+
+/*----
+Write an SQL query to fetch the first 50% records (without using PERCENT KEYWORD)
+from a table
+-----*/
+SELECT TOP 
+(SELECT COUNT(*)/2
+FROM Worker) *
+FROM Worker
+
+
+/*----
+Write an SQL query to fetch the departments that have less than 4 people in it
+-----*/
+SELECT Worker.*
+FROM Worker
+INNER JOIN (
+	SELECT department
+	FROM Worker
+	GROUP BY department
+	HAVING COUNT(*) < 4
+) AS temp
+ON Worker.department = temp.department;
+
+
+/*----
+Write an SQL query to show all departments along with the number of people in there
+-----*/
+SELECT department, COUNT(*) AS No_Of_People
+FROM Worker
+GROUP BY department
+
+
+/*----
+Write an SQL query to show the last record from table
+-----*/
+SELECT TOP 1 *
+FROM Worker
+ORDER BY worker_id DESC;
+
+
+/*----
+Write an SQL query to fetch the first row of a table
+----*/
+SELECT TOP 1 *
+FROM Worker
+
+
+/*-----
+Write an SQL query to fetch the last five records from table.-----*/SELECT TOP 5 *
+FROM Worker
+ORDER BY worker_id DESC;
+
+
+/*----
+Write an SQL query to print the name of employees having the highest salary in each
+department
+----*/
+SELECT Worker.first_name + ' ' + Worker.last_name AS Full_Name
+FROM Worker
+INNER JOIN
+(SELECT department, MAX(salary) AS Max_Salary
+FROM Worker
+GROUP BY department) 
+AS temp
+ON Worker.salary= temp.Max_Salary
+
+
+
+/*----
+Write an SQL query to fetch three max salaries from table
+----*/
+SELECT TOP 3 *
+FROM Worker
+ORDER BY salary DESC
