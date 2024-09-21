@@ -125,3 +125,74 @@ JOIN (
 ON w.department = dept_max.department AND w.salary = dept_max.max_salary;
 
 
+
+/*----
+7. Update the salary of workers by 15% whose deptname is 'HR'. otherwise update 
+by 10% salary
+-----*/
+UPDATE Worker
+SET salary = salary * (
+		CASE
+			WHEN department = 'HR' THEN 1.15
+			ELSE 1.10
+		END
+);
+
+
+
+/*----
+8. Write a query to find firstname and lastname as fullname , deptname whose 
+salary is maximum
+-----*/
+SELECT TOP 1 first_name + ' ' + last_name AS Full_Name, department
+FROM Worker
+INNER JOIN
+(SELECT MAX(salary) AS Max_salary
+FROM Worker) AS temp
+ON Worker.salary = temp.Max_salary;
+
+
+
+/*-----
+9. Write a query to find workerid, firstname whose salary is less than average salary
+----*/
+SELECT worker_id, first_name
+FROM Worker
+WHERE salary < (
+	SELECT AVG(salary)
+	FROM Worker
+);
+
+
+
+/*----
+10. find min salary from worker for each dept where min salary is less then 
+average salary
+----*/
+SELECT Worker.*
+FROM Worker
+INNER JOIN
+(SELECT department, MIN(salary) AS Min_Salary
+FROM Worker
+GROUP BY department) AS temp
+ON Worker.salary = temp.Min_Salary
+WHERE salary < (
+	SELECT AVG(salary)
+	FROM Worker
+)
+ORDER BY salary, department;
+
+
+
+/*----
+10. write an SQL query to print the name of employee having the highest salary
+in each department
+----*/
+SELECT Worker.*
+FROM Worker
+INNER JOIN
+(SELECT department, MAX(salary) AS Max_Salary
+FROM Worker
+GROUP BY department) AS temp
+ON Worker.salary = temp.Max_Salary
+ORDER BY salary DESC, department;
