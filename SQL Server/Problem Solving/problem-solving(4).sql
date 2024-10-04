@@ -1,4 +1,5 @@
 
+USE Employee;
 
 CREATE TABLE teacherInfo(
 TID INT,
@@ -120,11 +121,15 @@ WHERE Dept = (SELECT 'EEE');
 
 /*---
 Write a query to update salary by multiplying the salary by 100 where salary is
-greater than 5000 using subquery
+greater than 30000 using subquery
 ---*/
 UPDATE teacherInfo
-SET Salary = Salary * 100
-WHERE Salary > (SELECT 50000);
+SET Salary = Salary * 10
+WHERE Salary  IN (
+	SELECT Salary 
+	FROM teacherInfo 
+	WHERE Salary > 30000
+);
 
 
 /*---
