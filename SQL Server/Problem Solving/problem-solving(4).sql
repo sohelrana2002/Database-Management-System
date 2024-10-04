@@ -137,8 +137,12 @@ Write a query to find the name that starts with 'k/s' using a subquery
 ---*/
 SELECT *
 FROM teacherInfo
-WHERE FirstName LIKE (SELECT 'k%')
-OR FirstName LIKE (SELECT 's%');
+WHERE FirstName IN (
+	SELECT FirstName
+	FROM teacherInfo
+	WHERE FirstName LIKE 'k%' 
+	OR FirstName LIKE 's%'
+);
 
 
 
