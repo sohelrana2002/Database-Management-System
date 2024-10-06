@@ -1,5 +1,7 @@
 CREATE DATABASE Worker;
 
+USE Worker;
+
 CREATE TABLE workerInfo(
 worker_id int primary key,
 first_name varchar(20),
@@ -61,6 +63,7 @@ SET salary = salary + (salary * 0.1)
 WHERE dept_name = 'Admin';
 
 
+;
 /*--------
 Write an SQL query to update all worker bonus 10% whose joining_date before "2014-
 04-11 09:00:00" otherwise bonus update 5% and also check department name is "Admin".
@@ -131,7 +134,7 @@ AND DATALENGTH(first_name) = 7;
 /*-------
 Write an SQL query to find the position of the alphabet (n) in the FIRST_NAME column "Sanjoy" from Worker table
 ---------*/
-SELECT CHARINDEX('n', first_name) AS PositionOfN
+SELECT CHARINDEX('n', first_name) AS Position_Of_N
 FROM workerInfo
 WHERE first_name = 'Sanjoy'
 
@@ -140,7 +143,7 @@ WHERE first_name = 'Sanjoy'
 Find the average salary of employees for each department
 -----------*/
 SELECT dept_name, 
-AVG(salary) AS AverageSalary
+AVG(salary) AS Average_Salary
 FROM workerInfo
 GROUP BY dept_name;
 
@@ -148,19 +151,24 @@ GROUP BY dept_name;
 /*----------
 List all the employees who have maximum or minimum salary in each department
 ----------*/
-
-SELECT dept_name,
-MAX(salary) AS MaxSalary,
-MIN(salary) AS MinSalary
+SELECT workerInfo.*
 FROM workerInfo
-GROUP BY dept_name;
+INNER JOIN 
+(SELECT dept_name, 
+MAX(salary) AS Max_Salary,
+MIN(salary) AS Min_Salary
+FROM workerInfo
+GROUP BY dept_name) AS temp
+ON workerInfo.dept_name = temp.dept_name
+AND (workerInfo.salary = temp.Max_Salary OR workerInfo.salary = temp.Min_Salary)
+ORDER BY dept_name, salary
 
 
 /*---------
 Write an SQL query to find the position of the alphabet ("r") in the FIRST_NAME
 column "Rana" from Worker table.
 ---------*/
-SELECT CHARINDEX('r', first_name) AS PosotionOfR
+SELECT CHARINDEX('r', first_name) AS Posotion_Of_R
 FROM workerInfo
 WHERE first_name = 'Rana';
 
@@ -169,8 +177,9 @@ WHERE first_name = 'Rana';
 Write an SQL query to print the FIRST_NAME from Worker table after removing white
 spaces from the right side.
 ----------*/
-SELECT RTRIM(first_name) AS RemoveWhiteSpaceFromRighSide
+SELECT RTRIM(first_name) AS Remove_WhiteSpace_From_RighSide
 FROM workerInfo;
+
 
 
 /*---------
@@ -186,5 +195,5 @@ Write an SQL query to print the FIRST_NAME from Worker table after replacing "a"
 with "A".
 ----------*/
 SELECT first_name,
-REPLACE(first_name, 'a', 'A') AS AfterReplacing
+REPLACE(first_name, 'a', 'A') AS After_Replacing
 FROM workerInfo;

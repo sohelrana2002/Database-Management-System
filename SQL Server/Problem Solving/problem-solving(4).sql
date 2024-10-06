@@ -82,7 +82,11 @@ FROM teacherInfo T
 INNER JOIN MaxSaalaries
 ON T.Salary = MaxSaalaries.Salary;
 
-
+/* 2nd method*/
+SELECT TOP 1 
+FirstName + ' ' + LastName AS Full_Name, age
+FROM teacherInfo
+ORDER BY Salary DESC
 
 /*---
 Write a query to find firstname, age,dept whose age is between 23 to 27
@@ -105,9 +109,13 @@ WHERE Salary < (
 /*---
 Write a query to delete all ID where age is greater than 25 using subquery
 ---*/
-DELETE 
+DELETE
 FROM teacherInfo
-WHERE Age > 25;
+WHERE Age IN (
+	SELECT Age
+	FROM teacherInfo 
+	WHERE Age > 25
+);
 
 
 /*---
@@ -115,7 +123,12 @@ Write a query to update Dept by 'English' where Dept is 'EEE' using subquery
 ---*/
 UPDATE teacherInfo
 SET Dept = 'English'
-WHERE Dept = (SELECT 'EEE');
+WHERE Dept IN (
+	SELECT Dept 
+	FROM teacherInfo 
+	WHERE Dept = 'EEE'
+);
+
 
 
 
@@ -155,7 +168,7 @@ WHERE Salary > (
 	SELECT Salary 
 	FROM teacherInfo 
 	WHERE FirstName = 'Shafiul'
-);
+) AND Dept = 'CSE';
 
 
 /*---
@@ -178,7 +191,12 @@ SELECT teacherInfo.TID, teacherInfo.Salary, teacherMoreInfo.deptID
 FROM teacherInfo
 INNER JOIN teacherMoreInfo
 ON teacherInfo.TID = teacherMoreInfo.deptID
-WHERE Salary > (SELECT AVG(Salary) FROM teacherInfo);
+WHERE Salary > (
+	SELECT AVG(Salary) 
+	FROM teacherInfo
+);
+
+
 
 
 
@@ -208,8 +226,11 @@ SELECT FirstName, LastName, Dept
 FROM teacherInfo
 INNER JOIN teacherMoreInfo
 ON teacherInfo.TID = teacherMoreInfo.deptID
-WHERE teacherMoreInfo.location = 'Kazla';
-
+WHERE teacherMoreInfo.location = (
+	SELECT location
+	FROM teacherMoreInfo
+	WHERE location = 'Kazla'
+)
 
 /*---
 Write a query to find the TID,firsname,salary where the length of the firstname is at least 6

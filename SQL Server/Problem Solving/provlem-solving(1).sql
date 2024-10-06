@@ -1,5 +1,7 @@
 create database Employee;
 
+USE Employee;
+
 
 create table Worker(
 worker_id int,
@@ -27,11 +29,17 @@ select * from Worker;
 select count(department) from Worker where department= 'Admin';
 
 /*Write an SQL query to fetch worker names with salaries >= 50000 and <= 100000.*/
-select first_name, last_name from Worker where salary between 50000 and 100000;
+SELECT first_name, last_name 
+FROM Worker 
+WHERE salary 
+BETWEEN 50000 AND 100000;
 
 
 /*Write an SQL query to fetch the no. of workers for each department in the descending order.*/
-select * from Worker order by department desc;
+SELECT department, COUNT(*) AS Total_Emp
+FROM Worker
+GROUP BY department
+ORDER BY Total_Emp DESC;
 
 /*Write an SQL query to show only odd rows from a table*/
 select * from Worker where (worker_id % 2) = 1;
@@ -43,10 +51,15 @@ select * from Worker where (worker_id % 2) = 0;
 select top 4 first_name, department from Worker;
 
 /*Write an SQL query to fetch the departments that have less than three people in it.*/
-select department from Worker group by department having count(*) < 3;
+SELECT department
+FROM Worker
+GROUP BY department
+HAVING COUNT(*) <3
 
 /*Write an SQL query to show all departments along with the number of people in there.*/
 select department, count(department) as department from Worker group by department;
 
 /*Write an SQL query to show the last record from table.*/
-select top 1 * from Worker order by worker_id desc;
+SELECT TOP 1 * 
+FROM Worker
+ORDER BY worker_id DESC;

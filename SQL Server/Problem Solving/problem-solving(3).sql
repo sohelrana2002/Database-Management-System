@@ -1,5 +1,7 @@
 create database Employee;
 
+USE Employee;
+
 /*Worker table*/
 create table Worker(
 worker_id int,
@@ -99,9 +101,9 @@ ORDER BY Title.worker_title;
 Write an SQL query to fetch the number of employees working in the department
 'Admin'.
 --------*/
-SELECT TotalAdmin
+SELECT Total_Admin
 FROM
-(SELECT department, COUNT(*) AS TotalAdmin
+(SELECT department, COUNT(*) AS Total_Admin
 FROM Worker
 GROUP BY department) AS AdminTable
 WHERE department = 'Admin';
@@ -230,7 +232,7 @@ WHERE Salary IN (
 Write an SQL query to show the second highest salary from a table
 -----*/
 ----1st method----
-SELECT *
+SELECT Worker.*
 FROM Worker
 INNER JOIN
 (SELECT TOP 1 *
@@ -240,8 +242,7 @@ FROM (
 	ORDER BY salary DESC
 ) AS temp
 ORDER BY salary ASC
-) 
-AS temp2
+) AS temp2
 ON Worker.salary = temp2.salary;
 
 
@@ -315,7 +316,9 @@ FROM Worker
 
 
 /*-----
-Write an SQL query to fetch the last five records from table-----*/SELECT TOP 5 *
+Write an SQL query to fetch the last five records from table
+-----*/
+SELECT TOP 5 *
 FROM Worker
 ORDER BY worker_id DESC;
 
@@ -340,7 +343,7 @@ ON Worker.salary= temp.Max_Salary;
 /*----
 Write an SQL query to fetch three max salaries from table
 ----*/
-SELECT TOP 3 *
+SELECT DISTINCT TOP 3 *
 FROM Worker
 ORDER BY salary DESC
 
