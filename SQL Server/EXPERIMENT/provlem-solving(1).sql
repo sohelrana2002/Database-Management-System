@@ -25,7 +25,7 @@ values
 
 select * from Worker;
 
-/*Write an SQL query to fetch the number of employees working in the department ‘Admin’.*/
+/*Write an SQL query to fetch the number of employees working in the department ï¿½Adminï¿½.*/
 select count(department) from Worker where department= 'Admin';
 
 /*Write an SQL query to fetch worker names with salaries >= 50000 and <= 100000.*/

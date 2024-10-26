@@ -76,7 +76,7 @@ select * from Title;
 
 
 /*---------
-List all the employees except "Manager' & 'Asst. Manager'.
+1. List all the employees except "Manager' & 'Asst. Manager'.
 -----------*/
 SELECT *
 FROM Worker
@@ -86,7 +86,7 @@ WHERE Title.worker_title NOT IN('Manager', 'Asst. Manager');
 
 
 /*------
-List the workers in the ascending order of Designations of those joined after April 2014.
+2. List the workers in the ascending order of Designations of those joined after April 2014.
 ----*/
 SELECT *
 FROM Worker
@@ -98,7 +98,7 @@ ORDER BY Title.worker_title;
 
 
 /*---------
-Write an SQL query to fetch the number of employees working in the department
+3. Write an SQL query to fetch the number of employees working in the department
 'Admin'.
 --------*/
 SELECT Total_Admin
@@ -111,7 +111,7 @@ WHERE department = 'Admin';
 
 
 /*-------
-Write an SQL query to fetch worker names with salaries >= 50000 and <= 100000
+4. Write an SQL query to fetch worker names with salaries >= 50000 and <= 100000
 ------*/
 SELECT first_name, last_name
 FROM Worker
@@ -120,8 +120,7 @@ WHERE salary BETWEEN 50000 AND 100000
 
 
 /*-------
-Write an SQL query to fetch the no. of workers for each department in the descending
-order
+5. Write an SQL query to fetch the no. of workers for each department in the descending order
 ---------*/
 SELECT department, TotalNo
 FROM
@@ -132,7 +131,7 @@ ORDER BY department DESC
 
 
 /*------
-Write an SQL query to print details of the Workers who are also Managers.
+6. Write an SQL query to print details of the Workers who are also Managers.
 -----*/
 SELECT *
 FROM Worker
@@ -143,7 +142,7 @@ WHERE Title.worker_title IN('Manager');
 
 
 /*-------
-Write an SQL query to show only odd rows from a table.
+7. Write an SQL query to show only odd rows from a table.
 ---------*/
 SELECT *
 FROM Worker
@@ -152,7 +151,7 @@ WHERE (worker_id % 2 = 1);
 
 
 /*-------
-Write an SQL query to show only even rows from a table.
+8. Write an SQL query to show only even rows from a table.
 ---------*/
 SELECT *
 FROM Worker
@@ -160,7 +159,7 @@ WHERE (worker_id % 2 = 0);
 
 
 /*-----
-Write an SQL query to clone a new table from another table
+9. Write an SQL query to clone a new table from another table
 -----*/
 SELECT *
 INTO CloneTable
@@ -177,13 +176,13 @@ WHERE 1 = 0;
 
 
 /*-------
-Write an SQL query to show the current date and time.
+10. Write an SQL query to show the current date and time.
 ---------*/
 SELECT GETDATE() AS CurrentDate;
 
 
 /*--------
-Write an SQL query to show the top n (say 5) records of a table with Name and
+11. Write an SQL query to show the top n (say 5) records of a table with Name and
 Designation
 ----------*/
 SELECT TOP 5 W.first_name, T.worker_title
@@ -194,7 +193,7 @@ ON W.worker_id = T.worker_id;
 
 
 /*------
-Write an SQL query to determine the nth (say n=5) highest salary from a table
+12. Write an SQL query to determine the nth (say n=5) highest salary from a table
 ------*/
 SELECT TOP 5 *
 FROM Worker
@@ -202,7 +201,7 @@ ORDER BY salary DESC
 
 
 /*------
-Write an SQL query to fetch the list of employees with the same salary
+13. Write an SQL query to fetch the list of employees with the same salary
 -----*/
 ---1st method---
 SELECT Worker.*
@@ -229,7 +228,7 @@ WHERE Salary IN (
 
 
 /*-----
-Write an SQL query to show the second highest salary from a table
+14. Write an SQL query to show the second highest salary from a table
 -----*/
 ----1st method----
 SELECT Worker.*
@@ -262,7 +261,7 @@ DISTINCT --is used to avoid duplicate salary values
 
 
 /*----
-Write an SQL query to fetch the first 50% records from a table
+15. Write an SQL query to fetch the first 50% records from a table
 -----*/
 SELECT TOP 50 PERCENT *
 FROM Worker;
@@ -279,7 +278,7 @@ FROM Worker
 
 
 /*----
-Write an SQL query to fetch the departments that have less than 4 people in it
+16. Write an SQL query to fetch the departments that have less than 4 people in it
 -----*/
 SELECT Worker.*
 FROM Worker
@@ -293,7 +292,7 @@ ON Worker.department = temp.department;
 
 
 /*----
-Write an SQL query to show all departments along with the number of people in there
+17. Write an SQL query to show all departments along with the number of people in there
 -----*/
 SELECT department, COUNT(*) AS No_Of_People
 FROM Worker
@@ -301,7 +300,7 @@ GROUP BY department
 
 
 /*----
-Write an SQL query to show the last record from table
+18. Write an SQL query to show the last record from table
 -----*/
 SELECT TOP 1 *
 FROM Worker
@@ -309,14 +308,14 @@ ORDER BY worker_id DESC;
 
 
 /*----
-Write an SQL query to fetch the first row of a table
+19.0Write an SQL query to fetch the first row of a table
 ----*/
 SELECT TOP 1 *
 FROM Worker
 
 
 /*-----
-Write an SQL query to fetch the last five records from table
+20. Write an SQL query to fetch the last five records from table
 -----*/
 SELECT TOP 5 *
 FROM Worker
@@ -324,7 +323,7 @@ ORDER BY worker_id DESC;
 
 
 /*----
-Write an SQL query to print the name of employees having the highest salary in each
+21. Write an SQL query to print the name of employees having the highest salary in each
 department
 ----*/
 WITH temp AS (
@@ -341,7 +340,7 @@ ON Worker.salary= temp.Max_Salary;
 
 
 /*----
-Write an SQL query to fetch three max salaries from table
+22. Write an SQL query to fetch three max salaries from table
 ----*/
 SELECT DISTINCT TOP 3 *
 FROM Worker
@@ -350,6 +349,7 @@ ORDER BY salary DESC
 
 
 /*----
+EXTRA:
 List all the employees who have maximum or minimum salary in each department
 ----*/
 SELECT Worker.*

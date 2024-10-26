@@ -1,6 +1,12 @@
 create database Employee;
 
-/*Create a table employee*/
+
+/*----LAB ASSIGNMENT 1: ----*/
+
+/* ---
+1. Create a table Employee with following schema:
+(WORKER_ID(PK), FIRST_NAME, LAST_NAME, SALARY, DEPT_NAME)
+---- */
 create table employee(
 worker_id int primary key,
 first_name varchar(20),
@@ -9,23 +15,34 @@ salary int,
 dept_name varchar(20),
 )
 
-/*Add a new column; JOINING_DATE to the existing relation.*/
+/* ---
+2. Add a new column; JOINING_DATE to the existing relation
+--- */
 alter table employee add joining_date varchar(20);
 
-/*Change the datatype of SALARY.*/
+/* ---
+3.Change the datatype of SALARY
+---- */
 alter table employee alter column salary varchar(20)
 
-/*Modify the column width of the DEPARTMENT field of EMPLOYEE table*/
+/* ---
+5. Modify the column width of the DEPARTMENT field of EMPLOYEE table
+---- */
 alter table employee alter column dept_name varchar(30)
 
 
-/*Allow NULL for all columns except WORKER_ID.*/
+/*----LAB ASSIGNMENT 2: ----*/
+/*---
+1. Allow NULL for all columns except WORKER_ID
+----*/
 insert into employee (worker_id)
 values(222311057)
 
 select * from employee;
 
-/*Add constraints to check, while entering the SALARY value (i.e) SALARY > 100.*/
+/*-----
+2. Add constraints to check, while entering the SALARY value (i.e) SALARY > 100
+----*/
 alter table employee add check(salary > 100);
 
 insert into employee (salary)
@@ -34,7 +51,9 @@ values(50)
 insert into employee (salary)
 values(150)
 
-/*Define the field FIRST_NAME as UNIQUE. */
+/* ----
+3. Define the field FIRST_NAME as UNIQUE
+--- */
 alter table employee add unique(first_name);
 
 
@@ -44,7 +63,7 @@ values('SOHEL')
 truncate table employee;
 
 
-
+/*----LAB ASSIGNMENT 3: ----*/
 insert into employee(worker_id, first_name,last_name, salary, dept_name, joining_date)
 values
 (1, 'Rana', 'Hamid', 100000, 'HR', '2014-02-20 09:00:00'),
@@ -57,8 +76,9 @@ values
 (8, 'Keshob' ,'Ray', 90000, 'Admin' , '2014-04-11 09:00:00');
 
 
-/*-----Display all the information of 1st 5 employees of EMPLOYEE table with
-FIRST_NAME+LASTNAME as FULL_NAME.
+/*-----
+3. Display all the information of 1st 5 employees of EMPLOYEE table with
+FIRST_NAME+LASTNAME as FULL_NAME
 ----------*/
 SELECT TOP 5 worker_id, first_name + ' ' + last_name AS FullName, salary, dept_name,
 joining_date
@@ -66,7 +86,7 @@ FROM employee;
 
 
 /*-----------
-Display the complete record of employees working in Admin Department
+4. Display the complete record of employees working in Admin Department
 -------------*/
 SELECT *
 FROM employee
@@ -74,7 +94,7 @@ WHERE dept_name = 'Admin';
 
 
 /*------------
-Find the name of employees whose salary is greater than 200000
+5. Find the name of employees whose salary is greater than 200000
 ---------*/
 SELECT first_name + ' ' + last_name AS FullName
 FROM employee
@@ -82,7 +102,7 @@ WHERE salary > 200000;
 
 
 /*----------
-Update the Salary of Worker by 95000 whose ID is 8 .
+7. Update the Salary of Worker by 95000 whose ID is 8 .
 -------------*/
 UPDATE employee
 SET salary = salary + 95000
@@ -90,7 +110,7 @@ WHERE worker_id = 8;
 
 
 /*---------
-Delete the record of employee whose FIRST_NAME is Asad.
+8. Delete the record of employee whose FIRST_NAME is Asad.
 -----------*/
 DELETE employee
 WHERE first_name = 'Asad';

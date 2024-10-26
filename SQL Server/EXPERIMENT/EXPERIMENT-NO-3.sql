@@ -31,15 +31,15 @@ VALUES
 
 
 /*------
-Write an SQL query to print first three characters of FIRST_NAME from Worker table.
+1. Write an SQL query to print first three characters of FIRST_NAME from Worker table
 -------*/
 SELECT SUBSTRING(first_name, 1,3) AS FirstThreeChar
 FROM workerInfo;
 
 
 /*------
-Write an SQL query to print details of the Workers who have joined from Feb 2014 to
-March 2014.
+2. Write an SQL query to print details of the Workers who have joined from Feb 2014 to
+March 2014
 -------*/
 SELECT *
 FROM workerInfo
@@ -48,25 +48,29 @@ BETWEEN '2014-02-01' AND '2014-03-01';
 
 
 /*------
-Write an SQL query to print details of the Workers who have served for at least 6 months.
+3. Write an SQL query to print details of the Workers who have served for at least 6 months
 --------*/
 SELECT *
 FROM workerInfo
 WHERE DATEDIFF(MONTH, joining_date, GETDATE()) >= 6;
 
+/* ----
+4. Write an SQL query to update all worker salary whose title is manager
+----*/
+
+
 
 /*----------
-Write an SQL query to update all worker salary 10% whose dept is Admin.
+EXTRA: Write an SQL query to update all worker salary 10% whose dept is Admin.
 ----------*/
 UPDATE workerInfo
 SET salary = salary + (salary * 0.1)
 WHERE dept_name = 'Admin';
 
 
-;
 /*--------
-Write an SQL query to update all worker bonus 10% whose joining_date before "2014-
-04-11 09:00:00" otherwise bonus update 5% and also check department name is "Admin".
+5. Write an SQL query to update all worker bonus 10% whose joining_date before "2014-
+04-11 09:00:00" otherwise bonus update 5% and also check department name is "Admin"
 ---------*/
 UPDATE workerInfo
 SET salary = salary *
@@ -78,7 +82,7 @@ WHERE dept_name = 'Admin';
 
 
 /*-----------
-Write an SQL query to print details for Workers with the first name "Rana" and "Sajib"
+7. Write an SQL query to print details for Workers with the first name "Rana" and "Sajib"
 from Worker table.
 ---------*/
 --1ST method
@@ -98,7 +102,7 @@ WHERE first_name IN('Rana', 'Sajib');
 
 
 /*------
-Write an SQL query to print details of workers excluding first names, "Rana" and "Sajib"
+8. Write an SQL query to print details of workers excluding first names, "Rana" and "Sajib"
 from Worker table.
 ---------*/
 SELECT *
@@ -107,7 +111,7 @@ WHERE first_name NOT IN('Rana', 'Sajib');
 
 
 /*----------
-Write an SQL query to print details of the Workers whose FIRST_NAME contains "a"
+9. Write an SQL query to print details of the Workers whose FIRST_NAME contains "a"
 -----------*/
 SELECT *
 FROM workerInfo
@@ -115,7 +119,7 @@ WHERE first_name LIKE '%a%';
 
 
 /*--------
-Write an SQL query to print details of the Workers whose FIRST_NAME starts with "k".
+10. Write an SQL query to print details of the Workers whose FIRST_NAME starts with "k".
 ----------*/
 SELECT *
 FROM workerInfo
@@ -123,7 +127,7 @@ WHERE first_name LIKE 'k%';
 
 
 /*---------
-Write an SQL query to print details of the Workers whose FIRST_NAME ends with "r" and contains seven alphabets
+11. Write an SQL query to print details of the Workers whose FIRST_NAME ends with "r" and contains seven alphabets
 ----------*/
 SELECT *
 FROM workerInfo
@@ -132,7 +136,7 @@ AND DATALENGTH(first_name) = 7;
 
 
 /*-------
-Write an SQL query to find the position of the alphabet (n) in the FIRST_NAME column "Sanjoy" from Worker table
+12. Write an SQL query to find the position of the alphabet (n) in the FIRST_NAME column "Sanjoy" from Worker table
 ---------*/
 SELECT CHARINDEX('n', first_name) AS Position_Of_N
 FROM workerInfo
@@ -140,7 +144,7 @@ WHERE first_name = 'Sanjoy'
 
 
 /*-----------
-Find the average salary of employees for each department
+13. Find the average salary of employees for each department
 -----------*/
 SELECT dept_name, 
 AVG(salary) AS Average_Salary
@@ -149,7 +153,7 @@ GROUP BY dept_name;
 
 
 /*----------
-List all the employees who have maximum or minimum salary in each department
+14. List all the employees who have maximum or minimum salary in each department
 ----------*/
 SELECT workerInfo.*
 FROM workerInfo
@@ -165,7 +169,7 @@ ORDER BY dept_name, salary
 
 
 /*---------
-Write an SQL query to find the position of the alphabet ("r") in the FIRST_NAME
+15. Write an SQL query to find the position of the alphabet ("r") in the FIRST_NAME
 column "Rana" from Worker table.
 ---------*/
 SELECT CHARINDEX('r', first_name) AS Posotion_Of_R
@@ -174,8 +178,7 @@ WHERE first_name = 'Rana';
 
 
 /*--------
-Write an SQL query to print the FIRST_NAME from Worker table after removing white
-spaces from the right side.
+16. Write an SQL query to print the FIRST_NAME from Worker table after removing white spaces from the right side.
 ----------*/
 SELECT RTRIM(first_name) AS Remove_WhiteSpace_From_RighSide
 FROM workerInfo;
@@ -183,16 +186,14 @@ FROM workerInfo;
 
 
 /*---------
-Write an SQL query that fetches the unique values of FIRST_NAME from Worker table
-and prints its length.
+17. Write an SQL query that fetches the unique values of FIRST_NAME from Worker table and prints its length.
 -----------*/
 SELECT DISTINCT first_name, LEN(first_name) AS First_name_Length
 FROM workerInfo;
 
 
 /*---------
-Write an SQL query to print the FIRST_NAME from Worker table after replacing "a"
-with "A".
+18. Write an SQL query to print the FIRST_NAME from Worker table after replacing "a" with "A".
 ----------*/
 SELECT first_name,
 REPLACE(first_name, 'a', 'A') AS After_Replacing

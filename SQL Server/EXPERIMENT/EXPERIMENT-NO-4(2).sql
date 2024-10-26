@@ -43,7 +43,7 @@ SELECT *
 FROM teacherMoreInfo;
 
 /*----
-Update the Salary of Teacher by 15% whose DeptName is CSE, otherwise update by
+1. Update the Salary of Teacher by 15% whose DeptName is CSE, otherwise update by
 10% Salary
 -----*/
 UPDATE teacherInfo
@@ -56,7 +56,7 @@ SET Salary = Salary * (
 
 
 /*----
-Write a query to insert/copy the values of all attributes from one table to another using
+2. Write a query to insert/copy the values of all attributes from one table to another using
 (ID in) subquery
 ----*/
 SELECT *
@@ -68,7 +68,7 @@ FROM CopyTeacherInfo;
 
 
 /*----
-Write a query to find firstname and lastname as fullname , age whose salary is
+3. Write a query to find firstname and lastname as fullname , age whose salary is
 maximum
 ----*/
 WITH MaxSaalaries AS (
@@ -89,7 +89,7 @@ FROM teacherInfo
 ORDER BY Salary DESC
 
 /*---
-Write a query to find firstname, age,dept whose age is between 23 to 27
+4. Write a query to find firstname, age,dept whose age is between 23 to 27
 ----*/
 SELECT FirstName, Age, Dept
 FROM teacherInfo
@@ -97,7 +97,7 @@ WHERE Age BETWEEN 23 AND 27;
 
 
 /*---
-Write a query to find TID,firstname whose salary is less than average salary
+5. Write a query to find TID,firstname whose salary is less than average salary
 ---*/
 SELECT TID, FirstName
 FROM teacherInfo
@@ -107,7 +107,7 @@ WHERE Salary < (
 
 
 /*---
-Write a query to delete all ID where age is greater than 25 using subquery
+6. Write a query to delete all ID where age is greater than 25 using subquery
 ---*/
 DELETE
 FROM teacherInfo
@@ -119,7 +119,7 @@ WHERE Age IN (
 
 
 /*---
-Write a query to update Dept by 'English' where Dept is 'EEE' using subquery
+7. Write a query to update Dept by 'English' where Dept is 'EEE' using subquery
 ---*/
 UPDATE teacherInfo
 SET Dept = 'English'
@@ -133,7 +133,7 @@ WHERE Dept IN (
 
 
 /*---
-Write a query to update salary by multiplying the salary by 100 where salary is
+8. Write a query to update salary by multiplying the salary by 100 where salary is
 greater than 30000 using subquery
 ---*/
 UPDATE teacherInfo
@@ -146,7 +146,7 @@ WHERE Salary  IN (
 
 
 /*---
-Write a query to find the name that starts with 'k/s' using a subquery
+9. Write a query to find the name that starts with 'k/s' using a subquery
 ---*/
 SELECT *
 FROM teacherInfo
@@ -160,7 +160,7 @@ WHERE FirstName IN (
 
 
 /*---
-Find the Firstname,salary for all the teachers of CSE who have a higher salary than Shafiul using subquery
+10. Find the Firstname,salary for all the teachers of CSE who have a higher salary than Shafiul using subquery
 ---*/
 SELECT FirstName, Salary
 FROM teacherInfo
@@ -172,7 +172,7 @@ WHERE Salary > (
 
 
 /*---
-Find out the id,names of all teachers who belong to the same department as the
+11. Find out the id,names of all teachers who belong to the same department as the
 teacher 'Faisal' who is in department CSE and age is 26
 ---*/
 SELECT TID, FirstName, LastName
@@ -185,7 +185,7 @@ WHERE Dept = (
 
 
 /*---
-Find TID, salary, deptID whose salary is greater than average salary
+14. Find TID, salary, deptID whose salary is greater than average salary
 ---*/
 SELECT teacherInfo.TID, teacherInfo.Salary, teacherMoreInfo.deptID
 FROM teacherInfo
@@ -201,7 +201,7 @@ WHERE Salary > (
 
 
 /*---
-Find min salary from Teacher for each department where min salary is less than
+15. Find min salary from Teacher for each department where min salary is less than
 average salary
 ---*/
 WITH temp AS(
@@ -220,7 +220,7 @@ WHERE temp.Min_Salary < (SELECT AVG(Salary) FROM teacherInfo);
 
 
 /*---
-Find firstname,lastname,Dept where location name is Kazla using subquery
+16. Find firstname,lastname,Dept where location name is Kazla using subquery
 ---*/
 SELECT FirstName, LastName, Dept
 FROM teacherInfo
@@ -233,7 +233,7 @@ WHERE teacherMoreInfo.location = (
 )
 
 /*---
-Write a query to find the TID,firsname,salary where the length of the firstname is at least 6
+17. Write a query to find the TID,firsname,salary where the length of the firstname is at least 6
 ---*/
 SELECT TID, FirstName, Salary
 FROM teacherInfo
