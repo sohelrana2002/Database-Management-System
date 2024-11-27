@@ -27,7 +27,7 @@ VALUES
 (5, 'Sajib', 'Mia', 500000, 'Admin', '2014-06-11 09:00:00'),
 (6, 'Alamgir', 'Kabir', 200000, 'Account', '2014-06-11 09:00:00'),
 (7, 'Foridul', 'Islam', 75000, 'Account', '2014-01-20 09:00:00'),
-(8, 'Keshob' ,'Ray', 90000, 'Admin' , '2014-04-11 09:00:00');
+(8, 'Keshob' ,'Ray', 90000, 'Admin' , '2024-10-11 09:00:00');
 
 
 /*------
@@ -55,7 +55,7 @@ FROM workerInfo
 WHERE DATEDIFF(MONTH, joining_date, GETDATE()) >= 6;
 
 /* ----
-4. Write an SQL query to update all worker salary whose title is manager
+4. Write an SQL query to update all worker salary 1000tk whose title is manager
 ----*/
 
 
@@ -80,6 +80,11 @@ SET salary = salary *
 	END
 WHERE dept_name = 'Admin';
 
+/*---
+6. Write an SQL query to delete all workers who have not taken any bonus
+---*/
+DELETE FROM workerInfo
+WHERE dept_name != 'Admin';
 
 /*-----------
 7. Write an SQL query to print details for Workers with the first name "Rana" and "Sajib"
@@ -129,10 +134,17 @@ WHERE first_name LIKE 'k%';
 /*---------
 11. Write an SQL query to print details of the Workers whose FIRST_NAME ends with "r" and contains seven alphabets
 ----------*/
+--1st method
 SELECT *
 FROM workerInfo
 WHERE first_name LIKE '%r'
 AND DATALENGTH(first_name) = 7;
+
+--2nd method
+SELECT *
+FROM workerInfo
+WHERE first_name LIKE '%r'
+AND LEN(first_name) = 7;
 
 
 /*-------
@@ -165,7 +177,7 @@ FROM workerInfo
 GROUP BY dept_name) AS temp
 ON workerInfo.dept_name = temp.dept_name
 AND (workerInfo.salary = temp.Max_Salary OR workerInfo.salary = temp.Min_Salary)
-ORDER BY dept_name, salary
+ORDER BY dept_name, salary;
 
 
 /*---------

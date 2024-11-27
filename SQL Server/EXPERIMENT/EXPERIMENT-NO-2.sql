@@ -1,5 +1,7 @@
 create database Employee;
 
+USE Employee;
+
 
 /*----LAB ASSIGNMENT 1: ----*/
 
@@ -25,10 +27,15 @@ alter table employee add joining_date varchar(20);
 ---- */
 alter table employee alter column salary varchar(20)
 
+/*---
+Change the name of column/field DEPT_NAME to DEPARTMENT
+---*/
+EXEC sp_rename 'employee.Department',  'dept_name', 'COLUMN';
+
 /* ---
 5. Modify the column width of the DEPARTMENT field of EMPLOYEE table
 ---- */
-alter table employee alter column dept_name varchar(30)
+alter table employee alter column dept_name varchar(30);
 
 
 /*----LAB ASSIGNMENT 2: ----*/
@@ -76,6 +83,14 @@ values
 (8, 'Keshob' ,'Ray', 90000, 'Admin' , '2014-04-11 09:00:00');
 
 
+
+/*---
+2. Display all the information of EMPLOYEE table
+---*/
+SELECT *
+FROM employee;
+
+
 /*-----
 3. Display all the information of 1st 5 employees of EMPLOYEE table with
 FIRST_NAME+LASTNAME as FULL_NAME
@@ -101,16 +116,23 @@ FROM employee
 WHERE salary > 200000;
 
 
+/*---
+6. Write down the SQL Query to find out whose salary is greater than Sanjoy
+---*/
+SELECT *
+FROM employee
+WHERE salary > (SELECT TOP 1 salary FROM employee WHERE first_name = 'Sanjoy');
+
+
 /*----------
 7. Update the Salary of Worker by 95000 whose ID is 8 .
 -------------*/
 UPDATE employee
-SET salary = salary + 95000
+SET salary = 95000
 WHERE worker_id = 8;
 
 
 /*---------
 8. Delete the record of employee whose FIRST_NAME is Asad.
 -----------*/
-DELETE employee
-WHERE first_name = 'Asad';
+DELETE FROM employee
