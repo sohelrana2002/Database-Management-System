@@ -13,6 +13,7 @@ department varchar(20)
 );
 
 
+
 insert into Worker(worker_id, first_name,last_name, salary, joining_date, department)
 values
 (1, 'Rana', 'Hamid', 100000, '2014-02-20', 'HR'),
@@ -101,7 +102,7 @@ ORDER BY Title.worker_title;
 3. Write an SQL query to fetch the number of employees working in the department
 'Admin'.
 --------*/
-SELECT Total_Admin
+SELECT *
 FROM
 (SELECT department, COUNT(*) AS Total_Admin
 FROM Worker
@@ -127,7 +128,7 @@ FROM
 (SELECT department, COUNT(*) AS TotalNo
 FROM Worker
 GROUP BY department) AS TempTable
-ORDER BY department DESC
+ORDER BY TotalNo DESC
 
 
 /*------
@@ -167,11 +168,13 @@ FROM Worker;
 
 SELECT * FROM CloneTable;
 
+
 /*If you want to clone only the structure (without data), you can do this*/
 SELECT *
 INTO CloneTable2
 FROM Worker
 WHERE 1 = 0;
+
 
 
 
@@ -187,7 +190,7 @@ Designation
 ----------*/
 SELECT TOP 5 W.first_name, T.worker_title
 FROM Worker W
-JOIN Title T
+INNER JOIN Title T
 ON W.worker_id = T.worker_id;
 
 
@@ -195,9 +198,10 @@ ON W.worker_id = T.worker_id;
 /*------
 12. Write an SQL query to determine the nth (say n=5) highest salary from a table
 ------*/
-SELECT TOP 5 *
+SELECT DISTINCT salary
 FROM Worker
 ORDER BY salary DESC
+OFFSET 4 ROWS FETCH NEXT 1 ROWS ONLY;
 
 
 /*------
@@ -272,18 +276,17 @@ Write an SQL query to fetch the first 50% records (without using PERCENT KEYWORD
 from a table
 -----*/
 SELECT TOP 
-(SELECT COUNT(*)/2
-FROM Worker) *
+(SELECT COUNT(*)/2 FROM Worker) *
 FROM Worker
 
 
 /*----
 16. Write an SQL query to fetch the departments that have less than 4 people in it
 -----*/
-SELECT Worker.*
+SELECT *
 FROM Worker
 INNER JOIN (
-	SELECT department
+	SELECT department, COUNT(*) AS Total_Count
 	FROM Worker
 	GROUP BY department
 	HAVING COUNT(*) < 4
@@ -296,7 +299,7 @@ ON Worker.department = temp.department;
 -----*/
 SELECT department, COUNT(*) AS No_Of_People
 FROM Worker
-GROUP BY department
+GROUP BY department;
 
 
 /*----
@@ -335,14 +338,14 @@ WITH temp AS (
 SELECT Worker.first_name + ' ' + Worker.last_name AS Full_Name
 FROM Worker
 INNER JOIN temp
-ON Worker.salary= temp.Max_Salary;
+ON Worker.department = temp.department AND Worker.salary = temp.Max_Salary;
 
 
 
 /*----
 22. Write an SQL query to fetch three max salaries from table
 ----*/
-SELECT DISTINCT TOP 3 *
+SELECT DISTINCT TOP 3 salary
 FROM Worker
 ORDER BY salary DESC
 
