@@ -67,6 +67,7 @@ SELECT *
 FROM CopyTeacherInfo;
 
 
+
 /*----
 3. Write a query to find firstname and lastname as fullname , age whose salary is
 maximum
@@ -86,7 +87,12 @@ ON T.Salary = MaxSaalaries.Salary;
 SELECT TOP 1 
 FirstName + ' ' + LastName AS Full_Name, age
 FROM teacherInfo
-ORDER BY Salary DESC
+ORDER BY Salary DESC;
+
+--3rd method
+SELECT FirstName + ' ' + LastName AS Full_Name, age
+FROM teacherInfo
+WHERE Salary = (SELECT MAX(Salary) FROM teacherInfo);
 
 /*---
 4. Write a query to find firstname, age,dept whose age is between 23 to 27
@@ -230,7 +236,8 @@ WHERE teacherMoreInfo.location = (
 	SELECT location
 	FROM teacherMoreInfo
 	WHERE location = 'Kazla'
-)
+);
+
 
 /*---
 17. Write a query to find the TID,firsname,salary where the length of the firstname is at least 6

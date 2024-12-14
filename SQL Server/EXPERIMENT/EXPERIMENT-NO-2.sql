@@ -15,7 +15,9 @@ first_name varchar(20),
 last_name varchar(20),
 salary int,
 dept_name varchar(20),
-)
+);
+
+DROP TABLE employee
 
 /* ---
 2. Add a new column; JOINING_DATE to the existing relation
@@ -25,7 +27,8 @@ alter table employee add joining_date varchar(20);
 /* ---
 3.Change the datatype of SALARY
 ---- */
-alter table employee alter column salary varchar(20)
+alter table employee alter column salary varchar(20);
+
 
 /*---
 Change the name of column/field DEPT_NAME to DEPARTMENT
@@ -43,7 +46,7 @@ alter table employee alter column dept_name varchar(30);
 1. Allow NULL for all columns except WORKER_ID
 ----*/
 insert into employee (worker_id)
-values(222311057)
+values(222311057);
 
 select * from employee;
 
@@ -53,10 +56,10 @@ select * from employee;
 alter table employee add check(salary > 100);
 
 insert into employee (salary)
-values(50)
+values(50);
 
 insert into employee (salary)
-values(150)
+values(150);
 
 /* ----
 3. Define the field FIRST_NAME as UNIQUE
@@ -65,7 +68,7 @@ alter table employee add unique(first_name);
 
 
 insert into employee(first_name)
-values('SOHEL')
+values('SOHEL');
 
 truncate table employee;
 
@@ -121,7 +124,7 @@ WHERE salary > 200000;
 ---*/
 SELECT *
 FROM employee
-WHERE salary > (SELECT TOP 1 salary FROM employee WHERE first_name = 'Sanjoy');
+WHERE salary > (SELECT salary  FROM employee WHERE first_name = 'Sanjoy');
 
 
 /*----------

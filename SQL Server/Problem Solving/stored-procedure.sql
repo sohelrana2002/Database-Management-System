@@ -11,12 +11,31 @@ INSERT INTO student(id, name, email, address)
 VALUES 
 (222311057, 'SOHEL RANA', 'sohelrana110979@gmail.com', 'Godagari, Rajshahi'),
 (222311063, 'FAHIM RAHMAN', 'fahim0073@gmail.com', 'Chuadanga, Kushtia'),
-(222311051, 'SABIT RAIHAN', 'sabit51@gmail.com', 'Uposhohor, Rajshahi');
+(222311051, 'SABIT RAIHAN', 'sabit51@gmail.com', 'Uposhohor, Rajshahi'),
+(222311051, 'SABIT RAIHAN', 'sabit51@gmail.com', 'Cposhohor, Rajshahi');
 
 SELECT *
 FROM student;
 
 DROP TABLE student;
+
+/*---create culustered index----*/
+CREATE CLUSTERED INDEX student_id
+ON student (id ASC, address ASC);
+
+/*---check any index have or not----*/
+EXEC sp_helpindex student;
+
+
+/*---drop index---*/
+DROP INDEX student.student_id;
+
+/*---composite clustered index ---*/
+CREATE CLUSTERED INDEX IX_student
+ON student(address ASC, id ASC);
+
+
+TRUNCATE TABLE student;
 
 /*----create stored procedure-------*/
 CREATE PROC spStudent
@@ -93,7 +112,7 @@ EXEC outputParameterStudent 'sohelrana110979@gmail.com', @TotalCount
 IF(@TotalCount IS NULL)
 	PRINT 'Empty'
 ELSE
-	PRINT @TotalCount
+	PRINT @TotalCount;
 
 /*Note: if we cant use OUTPUT KEYWORD when EXEC then get null value*/
 /* result: Empty*/
